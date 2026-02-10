@@ -5,7 +5,7 @@ url_usinas = "https://dadosabertos.aneel.gov.br/dataset/283a0172-3966-49e7-ae45-
 url_tarifas = "https://dadosabertos.aneel.gov.br/dataset/5a583f3e-1646-4f67-bf0f-69db4203e89e/resource/fcf2906c-7c32-4b9b-a637-054e7a5234f4/download/tarifas-homologadas-distribuidoras-energia-eletrica.csv"
 url_indicadores = "https://dadosabertos.aneel.gov.br/dataset/d5f0712e-62f6-4736-8dff-9991f10758a7/resource/4493985c-baea-429c-9df5-3030422c71d7/download/indicadores-continuidade-coletivos-2020-2029.csv"
 
-df = pd.read_csv(url_tarifas, encoding='latin1', sep=';')
+df = pd.read_csv(url_tarifas, encoding="latin1", sep=";")
 print(df.head())
 print(df.columns)
 print(df.info())
