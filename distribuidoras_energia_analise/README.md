@@ -118,7 +118,7 @@ Mais detalhes em [docs/data_sources.md](docs/data_sources.md)
 🚧 **Em Desenvolvimento**
 
 - [x] Task 1: Planejamento e Arquitetura
-- [ ] Task 2: Setup do Ambiente
+- [x] Task 2: Setup do Ambiente
 - [ ] Task 3: Ingestão de Dados (Bronze)
 - [ ] Task 4: Transformação (Silver)
 - [ ] Task 5: Camada Analítica (Gold)
