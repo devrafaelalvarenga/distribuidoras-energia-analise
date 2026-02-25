@@ -7,11 +7,15 @@ import hashlib
 import json
 import pandas as pd
 
+from distribuidoras_energia_analise.ingestion.sources.base import SourceInfo
+
 
 @dataclass(frozen=True)
 class BronzeMeta:
     dataset: str
-    source_url: str
+    source_type: str
+    origin: str
+    request: dict
     extracted_at_utc: str
     row_count: int
     columns: list[str]
@@ -29,23 +33,13 @@ def _sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def build_and_write_meta(
-    *,
-    df: pd.DataFrame,
-    dataset: str,
-    source_url: str,
-    data_file_path: Path,
-    out_dir: Path,
-) -> Path:
-    """
-    Monta e grava _meta.json na mesma partição (out_dir).
-    """
-    extracted_at_utc = datetime.now(timezone.utc).isoformat()
-
+def write_meta(*, df: pd.DataFrame, info: SourceInfo, data_file_path: Path, out_dir: Path) -> Path:
     meta = BronzeMeta(
-        dataset=dataset,
-        source_url=source_url,
-        extracted_at_utc=extracted_at_utc,
+        dataset=info.dataset,
+        source_type=info.source_type,
+        origin=info.origin,
+        request=info.request,
+        extracted_at_utc=datetime.now(timezone.utc).isoformat(),
         row_count=int(len(df)),
         columns=list(df.columns.astype(str)),
         dtypes={str(k): str(v) for k, v in df.dtypes.astype(str).to_dict().items()},
